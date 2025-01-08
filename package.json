@@ -7,7 +7,8 @@
     "export": "next build && next export",
     "clean": "rimraf .next .turbo",
     "dev": "next",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "pnpm run build && wrangler pages deploy --project-name easydapp-docs ./out"
   },
   "dependencies": {
     "katex": "^0.16.19",
@@ -24,5 +25,8 @@
     "nextra-theme-docs": {
       "injected": true
     }
+  },
+  "devDependencies": {
+    "wrangler": "^3.100.0"
   }
 }
