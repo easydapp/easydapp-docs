@@ -1,0 +1,200 @@
+import { Bleed } from "nextra-theme-docs";
+
+# Code Module
+
+## Module Functionality
+
+The Code module is a flexible logic implementation tool that allows users to write TypeScript code to fulfill various data processing and computation requirements. The module supports dynamic inputs and outputs, enabling users to configure input parameters and output types while writing code for specific business logic.
+
+The primary goal of this module is to handle data logic processing, not directly interact with contracts. Its return value is the result of executing the code, and the type of **result** in the code must match the **Output** configuration of the module.
+
+---
+
+## Module Features
+
+1. **Flexible Input Configuration**:
+   - **Dynamic Input Support**: Allows adding input parameters via the `Input` section, with options to select from constants (`Const`) or references (`Refer`).
+   - **Support for Multiple Types**: Input parameters can be `String`, `Integer`, `Boolean`, `Number`, `Object`, or `Array`.
+
+2. **Controllable Output Data Types**:
+   - The module's output data type is user-configurable in the **Output** section, supporting various types.
+   - **The `result` type returned in the code must match the configured `Output` type.**
+
+3. **Flexible Code Editor**:
+   - **TypeScript Support**: Built-in editor supports writing and debugging TypeScript code.
+   - **Quick Testing**: Use the `Test Run` feature to verify code logic and see results in real time.
+   - **AI Code Assistance**: Supports generating code by describing requirements to AI via the `Edit in IDE` button or manual coding.
+
+4. **Module Name as Output Value Name**:
+   - The module name at the top defines the output value name for the entire module, used for subsequent module calls.
+
+---
+
+## Module Usage Guide
+
+### 1. Module Configuration
+
+#### Add Module
+
+- Drag the Code module into the workspace.
+
+#### Configure Module Name
+
+- Modify the module name at the top, which defines the module's output value name.
+- **Note**: The name must be unique for referencing in subsequent modules.
+
+#### Configure Input Parameters
+
+- **Add Input Parameters**:
+  - Click the `Add +` button to add parameters.
+  - Specify the parameter name (e.g., `id`) and select its source type and data type:
+    - **Const**: Defines a fixed value as the input parameter.
+    - **Refer**: References variables or constants from other modules, supporting dynamic data passing.
+  - The data type of input parameters can be `String`, `Integer`, `Boolean`, `Number`, `Object`, or `Array`.
+
+#### Edit Code Logic
+
+- **Enter the Editor**:
+  - Click the `Edit in IDE` button to open the code editor.
+  - Support for manually writing TypeScript code or generating it using AI assistance.
+
+- **Code Writing Requirements**:
+  - Define the types of input parameters at the top of the code.
+  - Ensure the return value `result` type matches the **Output** configuration type.
+  - Example code:
+
+    ```typescript
+    type Data = { id: number };
+    export const main = (data: Data): number => {
+      let result: number; // Define the return value type
+      result = data.id * 2; // Data logic
+      return result; // Return the result
+    };
+    ```
+
+#### Test Run
+
+- **Configure Test Parameters**:
+  - Assign test values to all input parameters in the `Test Run` section.
+  - Example: `id = 5`.
+
+- **Run and Verify**:
+  - Click the `Test Run` button to execute the code. The module will return the results for verification.
+
+#### Configure Output Type
+
+- **Set Output Type**:
+  - In the **Output** section, select the data type of the output value (e.g., `String`, `Number`, etc.).
+  - Ensure the output type matches the `result` type in the code.
+
+---
+
+### 2. Data Input
+
+- **Supported Input Sources**:
+  - **Const**: Define fixed values.
+  - **Refer**: Reference variables or constants from other modules.
+
+- **Supported Input Types**:
+  - **String**: Text, e.g., `"Hello"`.
+  - **Integer**: Whole numbers, e.g., `42`.
+  - **Boolean**: Boolean values, e.g., `true`.
+  - **Number**: Floating-point numbers, e.g., `3.14`.
+  - **Object**: JSON objects, e.g., `{ "key": "value" }`.
+  - **Array**: Arrays, e.g., `[1, 2, 3]`.
+
+---
+
+### 3. Data Output
+
+- The module's output is the result of executing the code.
+- **The Output section configures the output type**, which can include:
+  - **String**: Text.
+  - **Integer**: Whole numbers.
+  - **Boolean**: Boolean values.
+  - **Number**: Floating-point numbers.
+  - **Object**: JSON objects.
+  - **Array**: Arrays.
+
+---
+
+## Parameter Constraints and Rules
+
+1. **Input Parameter Naming Rules**:
+   - Name length: 1-64 characters.
+   - Allowed characters: Lowercase letters (`a-z`), numbers (`0-9`), and underscores (`_`).
+   - Avoid special characters and duplicate names.
+
+2. **Code Writing Notes**:
+   - Ensure the return value type matches the module's **Output** type.
+   - Follow the predefined code structure within the module and avoid altering fixed parts.
+
+3. **Test Parameter Configuration**:
+   - Assign values to all input parameters before running the code.
+
+---
+
+## Usage Examples
+
+### Example 1: Define a Constant and Return a Result
+
+- **Configuration**:
+  - Input Parameters:
+    - Name: `greeting`
+    - Type: `String`
+    - Source: `Const`
+    - Value: `Hello`
+  - **Code Logic**:
+
+    ```typescript
+    type Data = { greeting: string };
+    export const main = (data: Data): string => {
+      return `${data.greeting}, World!`;
+    };
+    ```
+
+  - **Output Type**: `String`
+
+- **Execution Result**: `Hello, World!`
+
+---
+
+### Example 2: Reference Variables and Calculate the Sum
+
+- **Configuration**:
+  - Input Parameters:
+    - Name: `a`
+    - Type: `Number`
+    - Source: `Refer` (reference another module's output).
+    - Name: `b`
+    - Type: `Number`
+    - Source: `Const`
+    - Value: `10`
+  - **Code Logic**:
+
+    ```typescript
+    type Data = { a: number; b: number };
+    export const main = (data: Data): number => {
+      return data.a + data.b;
+    };
+    ```
+
+  - **Output Type**: `Number`
+
+- **Execution Result**: If the output value of module `a` is `5`, the result is `15`.
+
+---
+
+## Notes
+
+1. **Flexible Input Configuration**:
+   - Define constants via `Const` or reference variables via `Refer` to meet different requirements.
+
+2. **Output Name Definition**:
+   - The module name at the top serves as the output value name and must be unique.
+
+3. **Debugging Suggestions**:
+   - Use the `Test Run` feature to test logic and check if inputs and outputs match.
+
+4. **Primary Use Case**:
+   - The module is intended for logic implementation rather than direct contract interaction, suitable for calculations, data processing, and similar scenarios.

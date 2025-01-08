@@ -1,0 +1,192 @@
+import { Bleed } from "nextra-theme-docs";
+
+# View Module
+
+## Module Functionality
+
+The View Module is a UI display module that supports displaying various types of data in a DApp, including text, boolean values, images, tables, and more. Users can use this module to display dynamic or static data, with optional support for adding hyperlink functionality.
+
+---
+
+## Module Features
+
+1. **Multi-Type Support**:
+   - The module supports multiple data display types, which can be selected in the top-right corner:
+     - **Text**: Display text.
+     - **Bool**: Display boolean values.
+     - **Image**: Display images.
+     - **Table**: Display tables.
+
+2. **Static or Dynamic Assignment**:
+   - The **Value** section allows defining static values or referencing variables from the workflow:
+     - **Const**: Input custom static values directly.
+     - **Refer**: Reference the output values from previous modules.
+
+3. **Hyperlink Support**:
+   - Links can be added to the displayed content, allowing users to click and navigate to the specified address.
+
+4. **Module Naming**:
+   - Custom names can be assigned at the top of the module for easier management and differentiation.
+
+5. **No Output**:
+   - This module is solely for display purposes and does not produce output data.
+
+---
+
+## How to Use the Module
+
+### 1. Module Setup
+
+#### Add the Module
+
+- Drag the View Module into the workspace.
+
+#### Configure the Module Name
+
+- Set the module name at the top to identify it.
+
+#### Configure the Display Type
+
+- Choose the type of data to display from the top-right options:
+  - **Text**: Displays text, integers, or floating-point numbers.
+  - **Bool**: Displays boolean values (true/false).
+  - **Image**: Displays images (supports URLs or integer arrays).
+  - **Table**: Displays tables (requires objects with headers and rows).
+
+#### Configure the Value Section
+
+- **Static Value (Const)**:
+  - Select `Const` in the `Value` section and input the value directly.
+- **Dynamic Value (Refer)**:
+  - Select `Refer` in the `Value` section and reference variables from the workflow.
+
+#### Configure Links (Optional)
+
+- Enable the `Link` toggle and input the link address to allow users to click and navigate to the link.
+
+---
+
+## Supported Data Types
+
+### 1. Text Component
+
+Supported types:
+
+```javascript
+const TextViewSupportedType = ['text', 'integer', 'number'];
+```
+
+
+
+### 1. **Bool Component**
+
+```javascript
+const BoolViewSupportedType = ['bool'];
+```
+
+
+
+### 3. **Table Component**
+
+```javascript
+const TableViewSupportedType = {
+  object: [
+    { key: 'headers', ty: { array: 'text' } }, // 表头：字符串数组
+    { key: 'rows', ty: { array: { array: 'text' } } } // 行数据：二维字符串数组
+  ]
+};
+```
+
+
+
+### 4. **Image Component**
+
+```javascript
+const ImageViewSupportedType = ['text', { array: 'integer' }];
+```
+
+
+
+## Usage Examples
+
+### Example 1: Display Text Data
+
+- **Configuration**:
+  - Display Type: `Text`
+  - **Value**:
+    - Const: `"Hello, World!"`
+- **Effect**: Displays `Hello, World!` on the interface.
+
+---
+
+### Example 2: Display Boolean Value
+
+- **Configuration**:
+  - Display Type: `Bool`
+  - **Value**:
+    - Refer: Reference variable `is_logged_in`
+- **Effect**: Displays `true` or `false` based on the value of `is_logged_in`.
+
+---
+
+### Example 3: Display Image
+
+- **Configuration**:
+  - Display Type: `Image`
+  - **Value**:
+    - Const: `"https://example.com/image.png"`
+  - Enable `Link` and set the link address to `"https://example.com"`
+- **Effect**: Displays an image; clicking the image navigates to `https://example.com`.
+
+---
+
+### **Example 4: Display Table**
+- ​	**Configuration**:
+  - Display Type：`Table`
+  - **Value** ：
+    
+    - Const:
+      ```json
+      {
+        "headers": ["Name", "Age", "City"],
+        "rows": [
+          ["Alice", "25", "New York"],
+          ["Bob", "30", "London"],
+          ["Charlie", "22", "Paris"]
+        ]
+      }
+      ```
+- **Effect**: Displays a table with the following content:
+  
+  | Name    | Age  | City     |
+  | ------- | ---- | -------- |
+  | Alice   | 25   | New York |
+  | Bob     | 30   | London   |
+  | Charlie | 22   | Paris    |
+
+---
+
+
+
+- ## Notes
+
+  1. **Match Display Type with Data Format**:
+     - Ensure that the `Value` data format matches the selected display type; otherwise, errors may occur.
+
+  2. **Dynamic Value Reference**:
+     - When referencing variables, verify that the variables are defined in the flow and compatible with the selected display type.
+
+  3. **Link Configuration**:
+     - When configuring links, ensure the input URL is valid and meets user navigation requirements.
+
+  4. **No Output**:
+     - This module is solely for data display, without any output, and cannot participate in subsequent data flow processing.
+
+  ---
+
+  ## Module Advantages
+
+  - **Support for Multiple Types**: Adaptable to various data display needs.
+  - **Combination of Dynamic and Static Values**: Supports custom input values and dynamic variable references.
+  - **User Interaction**: Enhances interactivity of displayed content through link functionality.
+  - **Ease of Operation**: Intuitive interface and flexible configuration reduce development complexity.

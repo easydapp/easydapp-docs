@@ -1,0 +1,111 @@
+import { Bleed } from "nextra-theme-docs";
+
+# URL Parameter Module
+
+## Module Functionality
+
+The URL Parameter Module (also known as the Global Module) is used to extract specific parameter values from a given URL. Users can define the parameter name they want to extract through simple configurations, and the module will parse the URL and output the corresponding parameter value. This module is widely used in scenarios where dynamic URL parameters need to be retrieved and used for subsequent logic processing.
+
+---
+
+## Module Features
+
+1. **Single Parameter Extraction**:
+   - Each module instance can only extract the value of one specified parameter.
+   - To extract multiple values, use separate URL Parameter Module instances for each parameter.
+
+2. **Fixed Output Format**:
+   - The **Output** format only supports `String`.
+
+3. **Scope of Application**:
+   - Applicable to standard URL parameter formats, such as `https://example.com?key=value&other=123`.
+   - Supports extracting parameter values only from the query string part of the URL (i.e., `?key=value`).
+
+4. **Error Tolerance**:
+   - If the specified parameter does not exist in the URL, the output will be an empty string.
+   - Automatically ignores invalid parts of the URL, such as undefined special characters or improperly formatted parameters.
+
+---
+
+## Module Tutorial
+
+### 1. Module Configuration
+
+- **Add Module**:
+  - Drag the URL Parameter Module into the workspace.
+
+- **Fill in the `Name` Field**:
+  - `Name` specifies the name of the URL parameter to be extracted (i.e., the `key` in `key=value`).
+  - Example: To extract the `query` parameter from `https://example.com?query=test`, enter `query` in the `Name` field.
+  - **The `Name` field is required**.
+
+- **Set Default Value (Optional)**:
+  - Enable the `default value` option to specify a default value for the parameter. If the parameter is not provided in the URL, the module will return the default value.
+
+- **Parameter Naming Rules**:
+  - Parameter names can only contain lowercase letters (`a-z`), numbers (`0-9`), and underscores (`_`).
+  - Length range: 1-64 characters.
+
+---
+
+### 2. Input Data
+
+Pass the target URL as a string to the module. The URL must include a query string in the format `https://example.com?key=value`.
+
+---
+
+### 3. Output Data
+
+- **Output Format**:
+  - The module outputs the extracted parameter value as a `String`.
+- **Special Cases**:
+  - If the specified parameter does not exist in the URL, the output will be an empty string.
+  - If the parameter has multiple values, the module will only return the first value.
+
+---
+
+## Usage Examples
+
+1. **Dynamically Extract User Search Keywords**:
+   - **URL**: `https://example.com/search?query=machine+learning&page=1`
+   - **Configuration**:
+     - `Name`: `query`
+   - **Output**: `machine learning`
+
+2. **Extract User ID**:
+   - **URL**: `https://example.com/profile?user_id=12345&lang=en`
+   - **Configuration**:
+     - `Name`: `user_id`
+   - **Output**: `12345`
+
+3. **Retrieve Pagination Information**:
+   - **URL**: `https://example.com/data?category=science&page=10`
+   - **Configuration**:
+     - `Name`: `page`
+   - **Output**: `10`
+
+---
+
+## Parameter Constraints and Rules
+
+1. **Parameter Naming Rules**:
+   - Parameter name length range: 1-64 characters.
+   - Allowed characters: lowercase letters (`a-z`), numbers (`0-9`), and underscores (`_`).
+   - Special characters (e.g., `@`, `#`, `%`, etc.) are not supported.
+
+2. **Input URL Format Requirements**:
+   - The URL must include a valid query string part (i.e., `?key=value`).
+   - Extraction from the path part or fragment (e.g., the part after `#`) is not supported.
+
+---
+
+## Notes
+
+1. **Single Parameter Limitation**:
+   - Each module instance can only extract one URL parameter. To extract multiple parameters, add separate instances for each.
+
+2. **Role of Default Values**:
+   - Setting a default value in the `default value` field prevents empty outputs due to missing parameters.
+
+3. **Output Data Type**:
+   - The output data type of the module is fixed to `String` and cannot be changed.

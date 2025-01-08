@@ -1,0 +1,181 @@
+import { Bleed } from "nextra-theme-docs";
+
+# Condition Module
+
+## Module Functionality
+
+The Condition Module allows users to define complex conditional logic to control data flow and branch selection. The module supports various data types for condition checks and provides flexible combinations (e.g., `and` and `or`) to meet complex scenario requirements.
+
+---
+
+## Module Features
+
+1. **Multi-Branch Support**:
+   - Multiple conditional branches can be added by clicking `+ Add branch` in the upper-right corner.
+   - Each branch consists of one or more conditions.
+
+2. **Condition Block Logic**:
+   - Each condition block supports adding multiple conditions via `+ Add`.
+   - Conditions within the block can be logically combined using `and` or `or`.
+
+3. **Dynamic Input Support**:
+   - The conditions must reference variables introduced earlier in the workflow.
+   - Supports referencing variables from previous modules as input.
+
+4. **Various Condition Types**:
+   - Supports multiple data types (e.g., text, boolean, integer, array, etc.) for condition checks.
+   - Allows flexible logic combinations (`and`, `or`, `not`).
+
+5. **No Direct Output**:
+   - The Condition Module itself does not generate output values; its functionality lies in selecting subsequent workflow branches based on the evaluation results.
+
+---
+
+## User Guide
+
+### 1. Setting Conditions
+
+#### Adding Conditional Branches
+
+- Click `+ Add branch` in the upper-right corner to add a new conditional branch.
+- Each branch consists of the following parts:
+  - **If**: Main condition block.
+  - **Else If**: Secondary condition blocks (can add multiple).
+  - **Else**: Default block executed when none of the conditions are met.
+
+#### Configuring Conditions
+
+- Each condition includes the following components:
+  - **Reference Variable**: Select the variable to evaluate, referencing a previous variable in the workflow.
+  - **Select Condition**: Choose the condition type (e.g., `is null`, `equal`, `contains`, etc.).
+  - **Compare Value**: Define the value to compare against (can be a constant or variable).
+
+#### Adding Multiple Conditions
+
+- Click `+ Add` to add more conditions and combine them using `and` or `or`.
+
+---
+
+## Supported Condition Types
+
+The following table lists the allowed condition types for each data type:
+
+```markdown
+ Text Type
+
+| Condition            | Description        |
+|-----------------------|--------------------|
+| none                 | Null check         |
+| not_null             | Not null check     |
+| equal                | Equals             |
+| not_equal            | Not equals         |
+| contains             | Contains           |
+| not_contains         | Does not contain   |
+| starts_with          | Starts with        |
+| not_starts_with      | Does not start with|
+| ends_with            | Ends with          |
+| not_ends_with        | Does not end with  |
+| length_equal         | Length equals      |
+| length_not_equal     | Length not equals  |
+| length_greater       | Length greater     |
+| length_greater_equal | Length greater/equal|
+| length_less          | Length less        |
+| length_less_equal    | Length less/equal  |
+| regex                | Matches regex      |
+| not_regex            | Does not match regex|
+
+### Boolean Type
+
+| Condition   | Description |
+|-------------|-------------|
+| none        | Null check  |
+| not_null    | Not null check|
+| equal       | Equals      |
+| not_equal   | Not equals  |
+| is_true     | Is true     |
+| is_false    | Is false    |
+
+### Integer Type
+
+| Condition    | Description |
+|--------------|-------------|
+| none         | Null check  |
+| not_null     | Not null check|
+| equal        | Equals      |
+| not_equal    | Not equals  |
+| greater      | Greater than|
+| greater_equal| Greater/equal|
+| less         | Less than   |
+| less_equal   | Less/equal  |
+
+### Number Type (Float)
+
+| Condition    | Description |
+|--------------|-------------|
+| none         | Null check  |
+| not_null     | Not null check|
+| equal        | Equals      |
+| not_equal    | Not equals  |
+| greater      | Greater than|
+| greater_equal| Greater/equal|
+| less         | Less than   |
+| less_equal   | Less/equal  |
+
+### Array Type
+
+| Condition            | Description        |
+|-----------------------|--------------------|
+| none                 | Null check         |
+| not_null             | Not null check     |
+| equal                | Equals             |
+| not_equal            | Not equals         |
+| contains             | Contains element   |
+| not_contains         | Does not contain   |
+| length_equal         | Length equals      |
+| length_not_equal     | Length not equals  |
+| length_greater       | Length greater     |
+| length_greater_equal | Length greater/equal|
+| length_less          | Length less        |
+| length_less_equal    | Length less/equal  |
+
+### Object Type
+
+| Condition            | Description        |
+|-----------------------|--------------------|
+| none                 | Null check         |
+| not_null             | Not null check     |
+| equal                | Equals             |
+| not_equal            | Not equals         |
+| contains_key         | Contains key       |
+| not_contains_key     | Does not contain key|
+| contains_value       | Contains value     |
+| not_contains_value   | Does not contain value|
+```
+
+
+
+## Notes
+
+1. **Variable Sources**:
+   - All variables used for condition evaluation must come from previous workflow steps.
+
+2. **Combination Logic**:
+   - Condition blocks support `and` and `or` combinations. Complex logic can be implemented using multiple condition blocks.
+
+3. **Data Type Matching**:
+   - The condition type must match the variable’s data type; otherwise, errors may occur.
+
+4. **Priority Settings**:
+   - Use `If` and `Else If` sequentially, with conditions prioritized from top to bottom.
+
+5. **No Direct Output**:
+   - The Condition Module's purpose is to select subsequent branches based on evaluation results, not to generate direct outputs.
+
+---
+
+## Module Advantages
+
+- **Supports Complex Logic**: Provides various condition checks and logical combinations.
+- **Dynamic Input Support**: Flexibly references variables output by previous modules.
+- **Intuitive Interface**: Quickly configure condition branches through an intuitive UI.
+- **Flexible Expansion**: Allows adding any number of condition blocks to meet complex requirements.

@@ -1,0 +1,185 @@
+# **EasyDapp Runtime Error Reference**
+
+This error reference document details all error types defined in the `LinkError` enumeration. These errors help identify and resolve common issues in the EasyDapp workflow system, enabling developers to quickly diagnose and fix problems.
+
+---
+
+## **1. System-Level Errors**
+
+- **SystemError**: Internal system error (code issue).
+  - `message`: Error message.
+
+---
+
+## **2. Component-Level Errors**
+
+- **EmptyComponents**: No components are defined.
+  - `message`: Error message.
+
+- **InvalidComponentId**: Invalid component ID.
+  - `id`: The invalid component ID.
+
+- **DuplicateComponentId**: Duplicate component ID.
+  - `id`: The duplicate component ID.
+
+- **CircularReference**: Circular reference detected.
+  - `id`: The component ID being referenced.
+
+- **AffluxComponentId**: Multiple outputs from a component are concentrated together.
+  - `from`: The ID of the source component.
+  - `afflux`: The ID of the component with concentrated outputs.
+
+- **UnknownComponentOrNotRefer**: Unknown or unreferenced component.
+  - `from`: (Optional) The ID of the required component.
+  - `id`: The ID of the missing component.
+
+- **InvalidEndpoint**: Invalid endpoint.
+  - `from`: The ID of the required component.
+  - `inlet`: The invalid inlet.
+
+- **ReferNoOutputComponent**: Referenced component has no output data.
+  - `from`: The ID of the required component.
+  - `refer`: The ID of the referenced component.
+
+---
+
+## **3. Element-Level Errors**
+
+### **3.1 Name-Related Errors**
+
+- **DuplicateParamName**: Duplicate parameter name.
+  - `name`: The duplicate parameter name.
+
+- **DuplicateFormName**: Duplicate form parameter name.
+  - `name`: The duplicate form name.
+
+- **DuplicateIdentityName**: Duplicate identity parameter name.
+  - `name`: The duplicate identity name.
+
+- **DuplicateInteractionName**: Duplicate interaction parameter name.
+  - `name`: The duplicate interaction name.
+
+---
+
+### **3.2 Data and Link-Related Errors**
+
+- **MismatchedLinkValueType**: Mismatch between type and value.
+  - `from`: The ID of the source component.
+  - `value`: The mismatched value.
+
+- **WrongLinkTypeForRefer**: Incorrect reference type.
+  - `from`: The ID of the required component.
+  - `inlet`: The inlet being referenced.
+  - `refer`: The incorrect reference.
+
+---
+
+### **3.3 Object-Related Errors**
+
+- **DuplicateObjectKey**: Duplicate object key.
+  - `from`: The ID of the source component.
+  - `key`: The duplicate key.
+
+- **InvalidObjectKey**: Invalid object key.
+  - `from`: The ID of the source component.
+  - `key`: The invalid key.
+
+---
+
+### **3.4 Code-Related Errors**
+
+- **InvalidVariantKey**: Invalid variable name.
+  - `from`: The ID of the source component.
+  - `key`: The invalid variable name.
+
+- **DuplicateVariantKey**: Duplicate variable name.
+  - `from`: The ID of the source component.
+  - `key`: The duplicate variable name.
+
+---
+
+### **3.5 Named Value-Related Errors**
+
+- **EmptyName**: Variable name is empty.
+  - `from`: The ID of the source component.
+  - `name`: The empty variable name.
+
+- **DuplicateName**: Duplicate variable name.
+  - `from`: The ID of the source component.
+  - `name`: The duplicate variable name.
+
+- **InvalidNamedValueType**: Invalid named value type.
+  - `from`: The ID of the source component.
+  - `message`: Error message.
+
+---
+
+### **3.6 Reference and Output-Related Errors**
+
+- **MismatchedInlets**: Inconsistent reference inlets and data.
+  - `from`: The ID of the source component.
+
+- **MismatchedOutput**: Mismatched output.
+  - `from`: The ID of the source component.
+
+---
+
+## **4. Specific Error Types**
+
+### **4.1 Constant-Related Errors**
+
+- **MismatchedConstValue**: Mismatch in constant value type.
+  - `from`: The ID of the source component.
+  - `output`: The expected type.
+  - `value`: The mismatched value.
+
+- **WrongConstValue**: Constant value validation failed.
+  - `from`: The ID of the source component.
+  - `message`: Error message.
+
+---
+
+### **4.2 Form-Related Errors**
+
+- **MismatchedFormDefaultValue**: Mismatch in form default value type.
+  - `from`: The ID of the source component.
+  - `output`: The expected type.
+  - `value`: The mismatched value.
+
+- **MismatchedFormSuffixValue**: Mismatch in form suffix value type.
+  - `from`: The ID of the source component.
+  - `value`: The mismatched value.
+
+---
+
+### **4.3 Identity-Related Errors**
+
+- **InvalidIdentity**: Invalid identity.
+  - `from`: The ID of the source component.
+  - `message`: Error message.
+
+- **InvalidIdentityHttpProxy**: Invalid identity HTTP proxy.
+  - `from`: The ID of the source component.
+  - `proxy`: The incorrect proxy address.
+
+---
+
+### **4.4 Call-Related Errors**
+
+- **InvalidCallTrigger**: Invalid call trigger.
+  - `from`: The ID of the source component.
+  - `message`: Error message.
+
+- **InvalidCallIdentity**: Invalid call identity.
+  - `message`: Error message.
+
+- **InvalidCallOutputType**: Invalid call output type.
+  - `message`: Error message.
+
+---
+
+## **5. Other Errors**
+
+- **MultipleOutput**: The component has multiple conflicting outputs.
+- **InvalidCondition**: Invalid condition configuration in the component.
+  - `message`: Error message.

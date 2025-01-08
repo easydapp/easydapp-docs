@@ -1,0 +1,150 @@
+import { Bleed } from "nextra-theme-docs";
+
+# Interaction Component Module
+
+## Module Functionality
+
+The Interaction Component Module provides various user interaction options for DApps, supporting forms like selection buttons, input fields, dropdowns, and more. It allows users to input data and generate outputs. The module supports four types of interaction components:
+
+1. **Choose**: Multiple buttons for users to select.
+2. **Choose & Form**: Users can select a button to submit a value or directly use an input field to submit a custom value.
+3. **Choose & Dropdown**: Dropdown menu with multiple options, **output is of Integer type**.
+4. **Choose & [Form]**: Allows importing entire data structures externally for users to select or input.
+
+The variable name can be set at the top of the module card, and **output types are either String or Integer, depending on the component type configuration**.
+
+---
+
+## Module Configuration Options
+
+### Options Configuration
+
+- **Const**: Users can directly set constant values using `Const`.
+- **Refer**: Reference variables from the workflow stream as option values using `Refer`.
+- **Supported Types**:
+  - **String**: For setting or referencing option text values.
+  - **Object** (for Choose & [Form] type): Supports complex structures, including option and value key-value pairs.
+
+---
+
+## Type Details
+
+### 1. Choose
+
+- **Functionality**: Displays multiple buttons for users to select, where each button corresponds to an option.
+- **Configuration Options**:
+  - **Options**: Define multiple buttons, each of which can either have constant values or reference variables.
+- **Output**: The value of the selected button, type is `String`.
+- **Use Case**: Used for selecting different operations or options, such as choosing products at different prices.
+
+---
+
+### 2. Choose & Form
+
+- **Functionality**: Users can submit preset values via buttons or use an input field to submit custom values if the button values are not suitable.
+- **Configuration Options**:
+  - **Options**: Define button options.
+  - **Default Value**: Set a default value for the input field.
+- **Output**: The value of the selected button or custom input in the field, type is `String`.
+- **Use Case**: Used in scenarios where button values are fixed but allow users to manually input custom values for submission, such as specifying order quantities or special requests.
+
+---
+
+### 3. Choose & Dropdown
+
+- **Functionality**: Displays a dropdown menu with multiple options, each containing additional attributes.
+- **Configuration Options**:
+  - **Options**: Can be set as an array of objects containing `option` and `value`.
+  - **Tips**: Provide extra information for each option.
+- **Output**: The selected option value, type is `Integer`.
+- **Use Case**: Used for presenting options with additional information, such as NFT names and prices.
+
+---
+
+### 4. Choose & [Form]
+
+- **Functionality**: Allows importing entire data structures externally, enabling users to select or input values based on predefined structures.
+- **Configuration Options**:
+  - **Options**: Set complex object structures, such as JSON data.
+  - **Has Form**: When enabled, allows input of additional custom values.
+- **Output**: The selected option value or custom input, type is `String`.
+- **Use Case**: Suitable for complex data input requirements, such as customizing orders.
+
+---
+
+## Configuration Examples
+
+### Example 1: Choose
+
+- **Configuration**:
+  - **Type**: Choose
+  - **Options**:
+    - Option 1: `Const -> option1`
+    - Option 2: `Const -> option2`
+    - Option 3: `Const -> option3`
+- **Output**: The value of the selected button, type is `String`.
+
+---
+
+### Example 2: Choose & Form
+
+- **Configuration**:
+  - **Type**: Choose & Form
+  - **Options**:
+    - Option 1: `Const -> option1`
+    - Option 2: `Const -> option2`
+  - **Default Value**: `"Custom Value"`
+- **Output**: The selected option or custom value from the input field, type is `String`.
+
+---
+
+### Example 3: Choose & Dropdown
+
+- **Configuration**:
+  - **Type**: Choose & Dropdown
+  - **Options**:
+    - Option 1: `option -> "NFT 1"`, `value -> "100 SOL"`
+    - Option 2: `option -> "NFT 2"`, `value -> "150 SOL"`
+  - **Tips**:
+    - Tip 1: `"Highly Valuable"`
+    - Tip 2: `"Limited Edition"`
+- **Output**: The value of the selected option, type is `Integer`.
+
+---
+
+### Example 4: Choose & [Form]
+
+- **Configuration**:
+  - **Type**: Choose & [Form]
+  - **Options**:
+    - `Const -> { option: "Option A", value: "Value A" }`
+    - `Const -> { option: "Option B", value: "Value B" }`
+  - **Has Form**: Enabled
+  - **Default Value**: `"Default Input"`
+- **Output**: The selected option value or custom input, type is `String`.
+
+---
+
+## Notes
+
+1. **Fixed Output Types**:
+   - **Choose**, **Choose & Form**, and **Choose & [Form]** output `String`.
+   - **Choose & Dropdown** outputs `Integer`.
+
+2. **Option Configuration**:
+   - Ensure that the values set in `Options` match the required data structure.
+
+3. **Default Value Setting**:
+   - For **Choose & Form** and **Choose & [Form]**, set reasonable default values to ensure user experience.
+
+4. **Dynamic Referencing**:
+   - When using `Refer`, ensure that the referenced variable is defined and holds the correct value.
+
+---
+
+## Module Advantages
+
+- **Multiple Interaction Types**: Supports buttons, input fields, dropdown menus, and more.
+- **Flexible Configuration**: Supports constant definitions and dynamic referencing.
+- **Complex Data Support**: Supports external data structure imports via `Choose & [Form]`.
+- **Intuitive Interface**: Simplifies the configuration process and improves development efficiency.

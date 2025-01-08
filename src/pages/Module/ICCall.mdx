@@ -1,0 +1,172 @@
+import { Bleed } from "nextra-theme-docs";
+
+# IC Call Module
+
+## Module Functionality
+
+The IC Canister Call Module is designed for interacting with Internet Computer (IC) Canister smart contracts in DApps. By configuring the Canister ID and methods, along with the built-in code editor, users can flexibly invoke on-chain methods, supporting both anonymous and wallet-specified operations.
+
+---
+
+## Module Features
+
+1. **Multiple Trigger Modes (Trigger by)**:
+   - **Loading**: Triggers requests as the DApp loads. If `Caching Data` is enabled, cache duration can be set.
+   - **Clock**: Triggers requests at fixed intervals (supports 10s, 20s, 30s, 60s). `Is Show Loading` can be enabled to display the loading status.
+   - **Click**: Triggers requests via button clicks.
+     - **C Mode**: Directly define button text.
+     - **R Mode**: Dynamically display button text by referencing variables.
+
+2. **Anonymous and Wallet Calls**:
+   - Supports anonymous calls (`Anonymous`) by default.
+   - If a wallet module is connected to the data flow, wallet-based calls can be enabled by toggling the wallet switch.
+
+3. **Dynamic or Static Canister ID Configuration**:
+   - **Refer**: Reference a variable from the data flow as the Canister ID.
+   - **Const**: Manually input a static Canister ID.
+   - **Candid Auto-Parsing**: Automatically retrieves the Canister's public Candid interface file and supports method selection.
+   - **Candid Upload**: If the interface file is unavailable, upload the Candid file via the `Upload Candid` button.
+
+4. **Code Assistance**:
+   - Both Request and Response sections support a built-in code editor.
+   - Includes IC-specific type conversion methods to simplify the development process.
+
+5. **Data Output**:
+   - Module output can be customized to specific data types, which must match the return type of the response handling code.
+
+---
+
+## User Guide
+
+### 1. Module Setup
+
+#### Add the Module
+
+- Drag the IC Canister Call module into the workspace.
+
+#### Configure Trigger Mode
+
+- Choose a trigger mode based on business logic:
+  - **Loading**: Trigger requests when the DApp loads.
+  - **Clock**: Set a fixed interval to trigger requests.
+  - **Click**: Trigger requests via button clicks.
+
+#### Configure Identity Mode
+
+- **Anonymous Mode**: Default mode enabling anonymous calls to Canister methods.
+- **Wallet Mode**:
+  - If a wallet module is connected, toggle the wallet switch to select the wallet as the call identity.
+
+#### Configure Canister ID
+
+- **Refer Mode**: Reference a variable from another module as the Canister ID.
+- **Const Mode**: Manually input the Canister ID.
+- **Candid Configuration**:
+  - Automatically retrieves the public Candid interface file and lists available methods in the `Methods` dropdown.
+  - If unavailable, upload the file via the `Upload Candid` button.
+
+#### Configure Request Body
+
+- **Request Body**:
+  - Use the built-in code module to write custom request logic in the editor.
+  - The code supports IC-specific type conversion methods, such as `Principal.fromText()`.
+
+#### Configure Response Handling
+
+- **Response Handling**:
+  - Process the on-chain returned data in the code editor.
+  - Simplify development using IC type conversion utilities.
+
+---
+
+### 2. Data Output
+
+- The module's output consists of processed response data.
+- Output type must align with the return type in the response handling code. Supported types include:
+  - **String**, **Integer**, **Boolean**, **Array**, **Object**, etc.
+
+---
+
+## Parameter Constraints and Rules
+
+1. **Trigger Modes**:
+   - Select a trigger mode suited to the scenario to avoid excessive requests.
+   - In Clock mode, set reasonable intervals.
+
+2. **Canister ID Configuration**:
+   - Ensure the Canister ID input or referenced variable is valid.
+   - Uploaded Candid files must meet required specifications.
+
+3. **Code Editing Considerations**:
+   - Request body and response handling code must match the input and output formats of the Canister method.
+   - Use built-in type conversion methods to streamline parameter and result processing.
+
+4. **Output Type Matching**:
+   - Ensure the `Output` configuration aligns with the response code's return type.
+
+---
+
+## Examples
+
+### Example 1: Query Balance
+
+- **Trigger Mode**: Click
+
+- **Identity Mode**: Anonymous
+
+- **Canister ID**: `abcd-efgh-ijkl`
+
+- **Method**: `icrc1_balance_of`
+
+- **Request Body**:
+
+```typescript
+export const main = (data: { owner: string }): object => {
+  const result = {
+    owner: Principal.fromText(data.owner),
+    subaccount: [],
+  };
+  return result;
+};
+```
+
+- **Response Handling**:
+
+  ```typescript
+  export const main = (response: any): string => {`
+    `return Balance: ${response.balance};`
+  `};
+  ```
+
+  
+
+**Output**：Balance: 1000
+
+
+
+---
+
+- ## Notes
+
+  1. **Trigger Mode Selection**:
+     - When using the **Loading** mode, ensure the cache settings are appropriate.
+     - For **Clock** mode, set reasonable intervals to avoid excessive requests.
+
+  2. **Canister Configuration**:
+     - Ensure the **Canister ID** and method are valid.
+     - If the methods cannot be parsed, verify that the uploaded **Candid file** is correct.
+
+  3. **Request and Response Consistency**:
+     - The request body and response handling code must align with the interface definition.
+
+  4. **Type Conversion**:
+     - Utilize built-in IC type conversion methods such as `Principal.fromText`.
+
+  ---
+
+  ## Module Advantages
+
+  - **Multiple Trigger Modes**: Adapt to various scenarios and fulfill complex business needs.
+  - **Flexible Identity Modes**: Support both anonymous and wallet-based calls.
+  - **Dynamic Configuration**: Accommodates static inputs and dynamic references for flexible Canister method invocation.
+  - **Built-in Tools**: Provides type conversion utilities to simplify development.

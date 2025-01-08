@@ -1,0 +1,185 @@
+import { Bleed } from "nextra-theme-docs";
+
+# Form Module
+
+## Module Functionality
+
+The Form Module provides DApp developers with the capability to collect and process user input through form submission. It supports various data types, including strings, integers, booleans, floats, objects, and arrays. Developers can use this module to validate and dynamically process user input effectively.
+
+---
+
+## Module Features
+
+1. **Support for Multiple Data Types**:
+   - String
+   - Integer
+   - Boolean
+   - Float
+   - Object
+   - Array
+
+2. **Default Values and Suffix Values**:
+   - **Default Values**: Set initial values for each field that users can modify.
+   - **Suffix Values**: Append fixed suffixes to user input values (applicable to specific data types).
+
+3. **Dynamic Validation**:
+   - Built-in validation functionality allows for complex logic validation through the Code Module, ensuring input data correctness.
+
+4. **Custom Code Support**:
+   - Integrate the Code Module for validation and processing logic, enabling developers to use TypeScript to implement custom dynamic validations and formatting.
+
+5. **Dynamic and Static Value Support**:
+   - Values can be defined as **Const** (static values) or dynamically referenced through **Refer** from preceding variables.
+
+6. **No Direct Output**:
+   - The Form Module collects user input and forwards it to subsequent modules for processing.
+
+---
+
+## Data Types and Features
+
+### 1. **String**
+
+   - **Features**:
+     - Allows users to input any string content.
+     - Supports default values and suffix values.
+   - **Example**:
+     - Use **Const** to set the default value to `"string"` and suffix value to `"SUFFIX"`.
+
+### 2. **Integer**
+
+   - **Features**:
+     - Allows users to input integer values.
+     - Supports setting default values.
+   - **Example**:
+     - Set default values through **Const**.
+
+### 3. **Boolean**
+
+   - **Features**:
+     - Allows users to toggle between True/False values.
+     - Default values can be set to either True or False.
+   - **Example**:
+     - Use **Default Value** to set the initial state of the Boolean to True.
+
+### 4. **Float**
+
+   - **Features**:
+     - Allows users to input floating-point numbers.
+     - Supports default and suffix values.
+   - **Example**:
+     - Set default values through **Const**.
+
+### 5. **Object**
+
+   - **Features**:
+     - Supports complex data structures.
+     - Values are in key-value pair format and can include nested objects.
+   - **Example**:
+     - Default values can be set in JSON format using **Const** or dynamically referenced through **Refer**.
+
+### 6. **Array**
+
+   - **Features**:
+     - Allows users to input a list of values.
+     - Element types can be specified (e.g., String, Integer, etc.).
+   - **Example**:
+     - Configure a string array with default values.
+
+---
+
+## Usage Guide
+
+### 1. Add the Module
+
+- Drag and drop the Form Module into the workspace and set the module name.
+
+### 2. Configure Input Data
+
+- In the **Value** section, choose the input type:
+  - **Const**: Define static values directly.
+  - **Refer**: Dynamically reference variables or flows.
+- Set suffix values for string and number types.
+
+### 3. Set Validation Logic
+
+- Open the **Validate** section and use the built-in Code Module to write validation logic.
+
+- Example Code (validate if input is a positive integer):
+
+
+```typescript
+export const main = (data: any): boolean => {
+    return data > 0;
+};
+```
+
+### **4. Dynamic Processing Logic**
+
+- Introduce the Code Module in the **Validate** or **Default Value** sections to handle complex logic.
+
+---
+
+
+# Example Configurations
+
+## Example 1: String Input
+
+- **Type**: String
+- **Value**:
+  - Default Value: `"string"`
+  - Suffix Value: `"SUFFIX"`
+- **Result**: Displays an input box where users can enter a string, with a suffix automatically appended.
+
+---
+
+## Example 2: Boolean Selection
+
+- **Type**: Boolean
+- **Value**:
+  - Default Value: `True`
+- **Result**: Displays a Boolean toggle, initially set to `True`.
+
+---
+
+## Example 3: Object Input
+
+- **Type**: Object
+- **Value**:
+  - **Const**: `{ "key": "value" }`
+- **Result**: Supports user input in JSON key-value pair format.
+
+---
+
+## Example 4: Array Input
+
+- **Type**: Array
+- **Value**:
+  - **Type**: `String`
+  - **Default Value**: `["item1", "item2"]`
+- **Result**: Allows users to input multiple strings as an array.
+
+---
+
+# Important Notes
+
+1. **Matching Data Types and Validation Logic**:
+   - Ensure the input data type aligns with the validation logic to avoid data format errors.
+
+2. **Proper Use of Default Values**:
+   - Verify data format correctness when setting default values.
+
+3. **Dynamic Reference Validity**:
+   - When using **Refer**, ensure the referenced variables are defined and match the expected type.
+
+4. **No Direct Output**:
+   - The Form Module collects input data; further processing must be handled by subsequent modules.
+
+---
+
+# Module Advantages
+
+- **Support for Various Data Types**: Covers multiple data types to meet diverse form requirements.
+- **Flexible Input Methods**: Supports both dynamic variable references and static value definitions.
+- **Powerful Validation Features**: Implements complex validation logic through the Code Module.
+- **Intuitive Interface**: Simplifies configuration processes and improves development efficiency.

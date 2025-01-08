@@ -1,0 +1,186 @@
+import { Bleed } from "nextra-theme-docs";
+
+# HTTP Module
+
+## Module Functionality
+
+The HTTP module is used to send HTTP requests and interact with external services. It supports various triggering modes, request methods, and response data processing methods, making it ideal for scenarios requiring dynamic data transmission or data retrieval. Through module configuration, users can flexibly set request headers, request bodies, and response handling methods.
+
+---
+
+## Module Features
+
+1. **Multiple Trigger Modes**:
+   - **Loading**: Trigger the request as the DApp loads. If `Caching Data` is enabled, you can set a cache duration.
+   - **Clock**: Trigger the request at fixed intervals (supports 10s, 20s, 30s, 60s). `Is Show Loading` can be enabled to display the loading state.
+   - **Click**: Trigger the request via a click action.
+     - **C Mode**: Define the button name directly.
+     - **R Mode**: Dynamically display button text by referencing a variable.
+
+2. **Supports Various Request Methods and Return Types**:
+   - **Request Methods**:
+     - GET, POST, PUT, DELETE.
+   - **Return Types**:
+     - JSON, Text, Blob.
+
+3. **Flexible URL Configuration**:
+   - Supports directly defining constants (`Const`) or referencing (`Refer`) variables from preceding modules as the request URL.
+
+4. **Request Body Configuration**:
+   - Supports two modes:
+     - **Plain Mode**: Manually add key-value pairs to define request parameters.
+     - **Code Mode**: Use a complete code template to handle complex requests.
+
+5. **Response Handling**:
+   - **Code Mode**: Integrate a code module to support custom response logic and data parsing.
+
+6. **Module Output**:
+   - Users can configure the output data type (e.g., String, JSON) and ensure it matches the return type in the response code.
+
+---
+
+## Module Usage Guide
+
+### 1. Module Configuration
+
+#### Trigger Modes
+
+- **Choose Trigger Mode**:
+  - **Loading Mode**: Trigger the request as the DApp loads. You can enable `Caching Data` to set a cache duration.
+  - **Clock Mode**: Trigger the request at fixed intervals, with available intervals of `10s`, `20s`, `30s`, or `60s`. You can enable `Is Show Loading` to display the loading state.
+  - **Click Mode**: Trigger the request via a click action.
+    - **C Mode**: Directly define the button name.
+    - **R Mode**: Dynamically display the button text by referencing a variable.
+
+#### Configure URL
+
+- Set the request URL in the `URL` section:
+  - **Const**: Input a fixed URL.
+  - **Refer**: Reference the output URL from preceding modules.
+
+- In the top-right corner of the URL settings, select the request method (e.g., GET, POST, PUT, DELETE) and return data type (e.g., JSON, Text, Blob).
+
+#### Add Headers (Optional)
+
+- Click `Add +` to add request headers.
+- Use key-value pairs to define custom headers.
+
+#### Set Request Body
+
+- **Plain Mode**:
+  - Add key-value pairs to define request parameters.
+  - Suitable for simple POST or PUT requests.
+
+- **Code Mode**:
+  - Enable `Code Mode` to write request logic in the built-in editor.
+
+  - Example:
+
+    ```typescript
+    type RequestBody = { id: string; name: string };
+    export const main = (): RequestBody => {
+      return { id: "123", name: "John" };
+    };
+    ```
+
+#### Response Handling
+
+- Use `Code Mode` to process response data:
+  - Open `Edit in IDE` to enter the code editor.
+  - Write parsing logic to format the response data as needed.
+
+  - Example:
+
+    ```typescript
+    export const main = (response: any): string => {
+      return `Response received: ${response.data}`;
+    };
+    ```
+
+#### Configure Output
+
+- Set the output data type in the `Output` section.
+- Ensure the output type matches the return type in the response code.
+
+---
+
+### 2. Data Input
+
+- URL, request body, and other data can be passed in through module configuration or referenced from the output values of preceding modules.
+
+---
+
+### 3. Data Output
+
+- The module's output is the processed result of the response.
+- The output name is set in the module, and the output type must match the return type in the response handling code.
+
+---
+
+## Examples
+
+### Example 1: GET Request to Fetch User Data
+
+- **Configuration**:
+  - **URL**: `https://example.com/user?id=123`
+  - **Request Method**: GET
+  - **Return Type**: JSON
+
+- **Response Handling Code**:
+
+```typescript
+export const main = (response: any): string => {
+  return `User name: ${response.name}`;
+};
+```
+
+​	**Output Type**：String
+
+### **Example 2: POST Request to Submit a Form**
+
+## **Configuration**:
+
+- **URL**：`https://example.com/submit`
+- **Request Method**：POST
+- **Request Body**：
+  - Mode：Plain
+  - Parameters：
+    - `name`: "Alice"
+    - `age`: 30
+- **Return Type**：JSON
+
+## **Response Handling Code**:
+
+```typescript
+export const main = (response: any): string => {
+  return `Submission status: ${response.status}`;
+};
+```
+
+​      **Output Type**: String
+
+---
+
+# Notes
+
+1. **Trigger Mode Selection**:
+   - Ensure the trigger mode aligns with business logic.
+   - When using the `Clock` mode, set reasonable intervals to avoid frequent requests.
+
+2. **Consistency Between Request Body and Response Handling Code**:
+   - Ensure the request body code matches the input and output data formats in the response handling code.
+
+3. **URL and Headers Configuration**:
+   - Set static or dynamic URLs and headers based on actual requirements.
+
+4. **Output Type Matching**:
+   - Ensure the `Output` configuration's output type matches the return type in the response handling code.
+
+---
+
+# Module Advantages
+
+- **Flexible Trigger Modes**: Supports various triggering scenarios to meet complex business needs.
+- **Dynamic Input and Output**: Allows inputs through constants or variables and outputs multiple data types flexibly.
+- **Robust Response Handling**: Built-in code editor supports complex logic, catering to diverse data processing requirements.
+- **User-Friendly Interface**: Offers an intuitive interface, reducing operational complexity and improving development efficiency.

@@ -1,0 +1,154 @@
+import { Bleed } from "nextra-theme-docs";
+
+# Constant Module
+
+## Module Functionality
+
+The Constant Module is used to define fixed value variables for reference in subsequent workflows. Through this module, users can set a fixed value for a variable and choose its type. The Constant Module is suitable for defining global constants, preset values, or initialization parameters.
+
+---
+
+## Module Features
+
+1. **Supports Multiple Data Types**:
+   - Constant values can be set to the following data types:
+     - **String**: String type.
+     - **Integer**: Integer type.
+     - **Boolean**: Boolean type (`true/false`).
+     - **Number**: Floating-point number type.
+     - **Object**: Object type.
+     - **Array**: Array type.
+
+2. **Fixed Output Format**:
+   - The module's output data type is determined by the type selected in the `Value` section and directly provided for subsequent references.
+
+3. **Single Constant Limitation**:
+   - **Only one constant can be created at a time**.
+   - To define multiple constants, drag multiple Constant Module instances.
+
+4. **Module Naming**:
+   - **The name editing field at the top of the module** is used to name the constant, which serves as the identifier for referencing the constant in subsequent modules.
+   - It is recommended to use concise and easily recognizable names, such as `api_key` or `is_active`.
+
+5. **Template Functionality**:
+   - The module supports templated configuration. By enabling the `Template` function, users can reuse the DApp without editing the entire workflow and only need to replace certain constants.
+   - This feature significantly improves development efficiency, making workflow maintenance and upgrades more convenient.
+
+---
+
+## Module Tutorial
+
+### 1. Module Configuration
+
+- **Add Module**:
+  - Drag the Constant Module into the workspace.
+
+- **Set the `Module Name`**:
+  - Click the name editing field at the top of the module to set a unique name for the constant.
+  - The name will serve as the identifier for referencing the constant in subsequent modules.
+
+- **Set the `Value`**:
+  - Enter the value of the constant in the `Value` field.
+  - Select the data type of the constant value (e.g., `String`, `Integer`, etc.).
+
+- **Enable Template Functionality (Optional)**:
+  - Turn on the `Template` switch, and fill in the `Title` and `Description` fields to provide an entry point for custom configuration when reusing workflows.
+
+---
+
+### 2. Input Data
+
+This module does not require external input. All values are directly defined by the user in the `Value` field.
+
+---
+
+### 3. Output Data
+
+- **Output Format**:
+  - The module's output format is determined by the data type selected in the `Value` section.
+  - The output value of the Constant Module can be referenced as a variable in subsequent modules.
+
+---
+
+## Template Functionality Introduction
+
+1. **Purpose of Templates**:
+   - When the `Template` function is enabled, users can adjust workflows by replacing specific constants without modifying the entire logic.
+   - Suitable for developers providing standardized workflow templates with adjustable configurations for users.
+
+2. **Configure Template Parameters**:
+   - **Title**: Provide a clear title for the template to describe the constant's function.
+   - **Description**: Provide detailed explanations of the constant's purpose and significance within the template.
+   - **Validate**: Support validation of template input values, including the following constraints:
+     - **Subtype**: Restrict the subtype of the input value (e.g., array element type).
+     - **Min Length**: Define the minimum length for arrays or strings.
+     - **Max Length**: Define the maximum length for arrays or strings.
+     - **Code**: Allow insertion of custom validation logic.
+
+3. **Applicable Scenarios**:
+   - Ideal for developers providing customizable DApp templates.
+   - Users only need to replace key constants to adjust workflows without redesigning the entire process.
+
+---
+
+## Parameter Constraints and Rules
+
+1. **Supported Data Types**:
+   - Users need to select the appropriate data type based on actual needs.
+   - Supported types include `String`, `Integer`, `Boolean`, `Number`, `Object`, and `Array`.
+
+2. **Constant Value Configuration Rules**:
+   - If the `String` type is selected, a valid string must be entered.
+   - If the `Array` type is selected, it must be in JSON array format (e.g., `[1, 2, 3]`).
+   - If the `Object` type is selected, it must be in JSON object format (e.g., `{"key": "value"}`).
+
+3. **Name Uniqueness**:
+   - Module names must be unique to ensure accurate referencing in subsequent modules.
+
+---
+
+## Notes
+
+1. **Single Constant Limitation**:
+   - **Each module can only define one constant**. To define multiple constants, drag multiple modules.
+
+2. **Enabling Template Functionality**:
+   - After enabling the Template function, use the title and description to guide users in quickly completing configurations.
+
+3. **Type Matching**:
+   - When referencing the output of the Constant Module, ensure subsequent modules can accept the data type.
+
+4. **Validation Rules**:
+   - When enabling the `Validate` function, use rules such as minimum and maximum values, subtypes, etc., to restrict input content.
+
+---
+
+## Applicable Examples
+
+1. **Defining a Global String Variable**:
+   - **Configuration**:
+     - **Module Name**: `api_key`
+     - `Value`: `API_KEY_123`
+     - Type: `String`
+   - **Usage**: Used to reference the API key consistently across multiple modules in the workflow.
+
+2. **Defining a Boolean Constant**:
+   - **Configuration**:
+     - **Module Name**: `is_enabled`
+     - `Value`: `true`
+     - Type: `Boolean`
+   - **Usage**: Serves as a toggle for logic control.
+
+3. **Defining an Array Variable**:
+   - **Configuration**:
+     - **Module Name**: `user_ids`
+     - `Value`: `[1, 2, 3, 4]`
+     - Type: `Array`
+   - **Usage**: Provides initial data for loops or batch processing.
+
+4. **Enabling Template Functionality**:
+   - **Configuration**:
+     - **Module Name**: `template_example`
+     - `Value`: `["example_value_1", "example_value_2"]`
+     - Enable the `Template` function, set the title to `User IDs`, and the description to `This is a list of user IDs used in the workflow.`
+   - **Usage**: Allows users to replace `user_ids` when reusing workflows without modifying the entire workflow logic.
