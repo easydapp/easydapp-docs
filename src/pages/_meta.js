@@ -1,7 +1,7 @@
 export default {
   index: "OverView",
-  Module: "Module",
   Introduction: "Introduction",
+  Module: "Module",
   Demo: "Demo",
   Error: "Error",
 };
