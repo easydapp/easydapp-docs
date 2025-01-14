@@ -24,9 +24,9 @@ export default {
   ),
   head: function useHead() {
     const config = useConfig()
-    const title = `${config.title} – Decitor`
+    const title = `${config.title} – Easydapp`
     const description =
-      config.frontMatter.description || 'Decitor'
+      config.frontMatter.description || 'Easydapp'
     const image = config.frontMatter.image || ''
 
     return (
